@@ -1,0 +1,136 @@
+% Change to 'masters' to produces the masters thesis preliminary pages
+\documentclass[twoside,phd]{UoBclass}
+
+\usepackage{import}
+
+% preamble contains title page, signature page, acknowledgement and abstract texts
+\usepackage{_preamble}
+
+% Packages used
+\usepackage[utf8]{inputenc} % Remove warning on ascii conversion
+\usepackage[T1]{fontenc} % Remove warning on ascii conversion
+\usepackage[refsection=part,citestyle=apa,style=authoryear,natbib=true,backend=biber]{biblatex}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% Make chapter numbers into string words 1 -> ONE
+\usepackage{fmtcount}
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{\vspace *{40\p@ }{\parindent \z@ 
+\raggedright \normalfont \ifnum \c@secnumdepth >\m@ne \Huge \bfseries 
+\@chapapp \space \Numberstring{chapter} \vskip 10\p@ \fi #1\par \nobreak \vskip 30\p@ }}
+\makeatother
+
+\usepackage[acronym,nomain]{glossaries}
+\parindent0pt  \parskip10pt             % make block paragraphs
+%\raggedright                            % do not right justify
+\usepackage{float}
+\usepackage[acronym,nomain]{glossaries}
+\parindent0pt  \parskip10pt             % make block paragraphs
+%\raggedright                            % do not right justify
+% Generate the glossary
+
+% Generate the glossary
+\makenoidxglossaries
+\newacronym{gp}{\#GP}{General Protection Fault}
+\newacronym{nm}{\#NM}{Device Not Available Exception}
+\newacronym{pf}{\#PF}{Page Fault}
+\newacronym{de}{\#DE}{division by zero}
+\newacronym{bp}{\#BP}{Breakpoint}
+\newacronym{db}{\#DE}{Debug}
+\newacronym{mc}{\#MC}{Machine Check Exception}
+\newacronym{apic}{APIC}{Advanced Programmable Interrupt Controller}
+\newacronym{crc}{CRC}{ : Contrôle de redondance cyclique }
+\newacronym{cots}{COTS}{Commercial off – the – shelf}
+\newacronym{fosdem}{FOSDEM}{ : Free and open source software developers' European meeting }
+\newacronym{gva}{GVA}{Guest Virtual Addresses}
+\newacronym{gpa}{GPA}{Guest Physical Addresses}
+\newacronym{hpa}{HPA}{Host Physical Addresses}
+\newacronym{hva}{HVA}{Host Virtual Addresses}
+\newacronym{dma}{DMA}{Direct Memory Access}
+\newacronym{dwc}{DWC}{Duplication With Comparison}
+\newacronym{ec}{EC}{Execution Context}
+\newacronym{ecc}{ECC}{ : Error Correcting Code }
+\newacronym{ipc}{IPC}{Inter – Processes Communication}
+\newacronym{mca}{MCA}{ : Machine Check Architecture }
+\newacronym{nmi}{NMI}{Non-Maskable Interrupt}
+\newacronym{os}{OS}{Operating System}
+\newacronym{ot}{OT}{Operational Transaction}
+\newacronym{pd}{PD}{Protection Domains}
+\newacronym{pe}{PE}{Processing Element}
+\newacronym{pmi}{PMI}{Performance Monitoring Interrupt}
+\newacronym{rp}{RP}{Root Process}
+\newacronym{sc}{SC}{Scheduling Context}
+\newacronym{seu}{SEU}{Single Event Upset}
+\newacronym{simd}{SIMD}{ : Single Instruction Multiple Data }
+\newacronym{sipi}{SIPI}{Start-up Inter-Processor Interrupt}
+\newacronym{usb}{USB}{ : Universal Serial Bus }
+\newacronym{vmcb}{VMCB}{Virtual Machine Control Block}
+\newacronym{vmcs}{VMCS}{Virtual Machine Control Structure}
+\newacronym{vmm}{VMM}{Virtual Machine Monitor/Manager}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\leftmark}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\cfoot{\thepage}
+
+\addbibresource{_bib.bib}
+
+\begin{document}
+
+\hypersetup{breaklinks=true}
+
+ % Start page counting in roman numerals
+ \frontmatter
+
+ % This command makes the formal preliminary pages.
+ % You can comment it out during the drafting process if you want to save paper.
+ \makepreliminarypages
+
+ \doublespace
+ % Make the table of contents.
+ \tableofcontents
+ \thispagestyle{plain}
+ 
+  % Make the list of figures
+ \mylistoffigures
+ \thispagestyle{plain}
+
+ % Make the list of tables
+ \mylistoftables
+ \thispagestyle{plain}
+ 
+  % This page is OPTIONAL. To remove, comment out and \dedicationpage in _thesis.tex
+ %\dedicationpage
+ \clearemptydoublepage
+ 
+ \semidoublespace
+ 
+ % Start regular page counting at page 1
+ \mainmatter
+
+% OK. Everything is set up. Type your thesis here.
+\include{chapter1/ch1}
+\include{chapter2/ch2}
+\include{chapter3/ch3}
+\include{chapter4/ch4}
+\include{chapter5/ch5}
+\include{chapter6/ch6}
+\include{_conclusion}
+
+% Appendices
+\include{_appendix}
+
+% Bibliography
+\begingroup
+    \setlength\bibitemsep{10pt}
+    \linespread{1}\selectfont
+    \printbibliography[title=References]
+\endgroup
+\addcontentsline{toc}{part}{References}
+
+\end{document}
